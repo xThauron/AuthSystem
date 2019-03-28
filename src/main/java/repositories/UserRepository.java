@@ -52,14 +52,4 @@ public class UserRepository implements IUserRepository {
         entityManager.close();
         return user;
     }
-
-    @Override
-    public boolean isUsername(String username) {
-        return findUserByUsername(username) == null;
-    }
-
-    @Override
-    public boolean isEmail(String email) {
-        return findUserByEmail(email) == null;
-    }
 }

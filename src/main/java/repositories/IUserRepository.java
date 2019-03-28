@@ -10,6 +10,4 @@ public interface IUserRepository {
     List<User> getList();
     User findUserByUsername(String username);
     User findUserByEmail(String email);
-    boolean isUsername(String username);
-    boolean isEmail(String email);
 }
