@@ -1,10 +1,9 @@
 package services;
 
 import models.User;
-import org.graalvm.compiler.lir.LIRInstruction;
+import org.mindrot.jbcrypt.BCrypt;
 import repositories.IUserRepository;
 import repositories.UserRepository;
-import org.mindrot.jbcrypt.BCrypt;
 
 import java.util.List;
 
@@ -52,5 +51,17 @@ public class UserService implements IUserService {
     @Override
     public boolean isEmail(String email) {
         return findUserByEmail(email) == null;
+    }
+
+    public boolean isCredentialsMatched(User user) {
+        String dbPassword = userRepository.findUserByUsername(user.getUsername()).getPassword();
+        if (dbPassword == null) {
+            return false;
+        }
+        return BCrypt.checkpw(user.getPassword(), dbPassword);
+    }
+
+    public User login(String username) {
+        return userRepository.findUserByUsername(username);
     }
 }

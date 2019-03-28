@@ -13,7 +13,9 @@ public class UserRepository implements IUserRepository {
     @Override
     public void add(User user) {
         entityManager = EntityManagerFactoryListener.createEntityManager();
+        entityManager.getTransaction().begin();
         entityManager.persist(user);
+        entityManager.getTransaction().commit();
         entityManager.close();
     }
 
@@ -30,7 +32,7 @@ public class UserRepository implements IUserRepository {
     public List<User> getList() {
         entityManager = EntityManagerFactoryListener.createEntityManager();
         Query query = entityManager.createQuery("SELECT u FROM User u", User.class);
-        List<User> list = (List<User>)query.getResultList();
+        List<User> list = (List<User>) query.getResultList();
         entityManager.close();
         return list;
     }
@@ -39,7 +41,7 @@ public class UserRepository implements IUserRepository {
     public User findUserByUsername(String username) {
         entityManager = EntityManagerFactoryListener.createEntityManager();
         Query query = entityManager.createQuery("SELECT u FROM User u WHERE lower(username) = :username").setParameter("username", username.toLowerCase());
-        User user = (User)query.getSingleResult();
+        User user = (User) query.getSingleResult();
         entityManager.close();
         return user;
     }
@@ -48,7 +50,7 @@ public class UserRepository implements IUserRepository {
     public User findUserByEmail(String email) {
         entityManager = EntityManagerFactoryListener.createEntityManager();
         Query query = entityManager.createQuery("SELECT u FROM User u WHERE lower(email) = :email").setParameter("email", email.toLowerCase());
-        User user = (User)query.getSingleResult();
+        User user = (User) query.getSingleResult();
         entityManager.close();
         return user;
     }
