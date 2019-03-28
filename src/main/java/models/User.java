@@ -16,6 +16,10 @@ public class User {
     @Transient
     private String passwordConfirm;
 
+    public User(String username) {
+        this.username = username;
+    }
+
     public User(String username, String email, String password, String passwordConfirm) {
         this.username = username;
         this.email = email;

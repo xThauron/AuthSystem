@@ -1,10 +1,10 @@
 package models;
 
-public class UserLogin {
+public class UserLoginForm {
     private String username;
     private String password;
 
-    public UserLogin(String username, String password) {
+    public UserLoginForm(String username, String password) {
         this.username = username;
         this.password = password;
     }
