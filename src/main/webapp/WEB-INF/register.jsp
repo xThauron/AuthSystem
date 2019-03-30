@@ -1,5 +1,5 @@
 <%@ page import="java.util.HashMap" %>
-<%@ include file="WEB-INF/layout/header.jsp" %>
+<%@ include file="layout/header.jsp" %>
 <% HashMap errors = (HashMap) request.getAttribute("errors"); %>
 
 <div class="row justify-content-center align-items-center">
@@ -49,4 +49,4 @@
         </form>
     </div>
 </div>
-<%@ include file="WEB-INF/layout/footer.jsp" %>
+<%@ include file="layout/footer.jsp" %>

@@ -5,6 +5,8 @@ import models.User;
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
@@ -23,8 +25,14 @@ public class RegisterFilter implements Filter {
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         HttpServletRequest httpServletRequest = (HttpServletRequest) servletRequest;
+        HttpSession session = httpServletRequest.getSession();
+
         if (!httpServletRequest.getMethod().equalsIgnoreCase("POST")) {
             servletRequest.getRequestDispatcher("/register").forward(servletRequest, servletResponse);
+        } else if(session.getAttribute("user") != null) {
+            HttpServletResponse httpServletResponse = (HttpServletResponse) servletResponse;
+            httpServletResponse.setCharacterEncoding("UTF-8");
+            httpServletResponse.sendRedirect("/");
         }
 
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
@@ -48,7 +56,7 @@ public class RegisterFilter implements Filter {
                 errors.put(constraintViolation.getPropertyPath().toString(), constraintViolation.getMessage());
             }
             servletRequest.setAttribute("errors", errors);
-            servletRequest.getRequestDispatcher("/register.jsp").forward(servletRequest, servletResponse);
+            servletRequest.getRequestDispatcher("/WEB-INF/register.jsp").forward(servletRequest, servletResponse);
         }
     }
 

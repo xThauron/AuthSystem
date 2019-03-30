@@ -1,5 +1,5 @@
 <%@ page import="java.util.HashMap" %>
-<%@ include file="WEB-INF/layout/header.jsp" %>
+<%@ include file="layout/header.jsp" %>
 <% String loginError = (String) request.getAttribute("loginError"); %>
 
 <div class="row justify-content-center align-items-center">
@@ -17,14 +17,13 @@
             <div class="form-group">
                 <button type="submit" class="btn btn-primary" name="action" value="btnLogin">Login
                 </button>
-
-                <%
-                    if (loginError != null && !loginError.isEmpty()) {
-                        out.print("<span class=\"text-danger\">" + loginError + "</span>");
-                    }
-                %>
             </div>
+            <%
+                if (loginError != null && !loginError.isEmpty()) {
+                    out.print("<span class=\"text-danger\">" + loginError + "</span>");
+                }
+            %>
         </form>
     </div>
 </div>
-<%@ include file="WEB-INF/layout/footer.jsp" %>
+<%@ include file="layout/footer.jsp" %>

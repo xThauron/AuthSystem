@@ -1,6 +1,8 @@
 package models;
 
+import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
+import validators.UniqueUsername;
 
 import javax.persistence.*;
 import javax.validation.constraints.AssertTrue;
@@ -12,10 +14,12 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
+    @UniqueUsername(message = "{User.username.Unique}")
     private String username;
     @Pattern(regexp = "((?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=\\S+$).{8,32})",
             message = "{User.password.Pattern}")
     private String password;
+    @Email(message = "{User.email.Pattern}")
     private String email;
     private String role;
 

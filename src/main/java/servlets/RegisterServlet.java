@@ -22,16 +22,14 @@ public class RegisterServlet extends HttpServlet {
     }
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        HttpSession session = request.getSession();
-        if(session.getAttribute("user") != null) {
-            response.sendRedirect("/profile");
-        } else {
-            response.sendRedirect("/register.jsp");
-        }
+        request.getRequestDispatcher("/WEB-INF/register.jsp").forward(request, response);
     }
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         User user = (User) request.getAttribute("user");
+        if(userService.isUsername(user.getUsername())) {
+
+        }
         userService.register(user);
         response.sendRedirect("/login");
     }
