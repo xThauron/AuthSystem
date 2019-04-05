@@ -44,17 +44,13 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public boolean isUsername(String username) {
+    public boolean isUsernameExists(String username) {
         return findUserByUsername(username) != null;
     }
 
-    @Override
-    public boolean isEmail(String email) {
-        return findUserByEmail(email) != null;
-    }
 
     public boolean isCredentialsMatched(User user) {
-        if(!isUsername(user.getUsername())) return false;
+        if(!isUsernameExists(user.getUsername())) return false;
         return BCrypt.checkpw(user.getPassword(), findUserByUsername(user.getUsername()).getPassword());
     }
 

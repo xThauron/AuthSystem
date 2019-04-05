@@ -15,9 +15,7 @@ public interface IUserService {
 
     List<User> getList();
 
-    boolean isUsername(String username);
-
-    boolean isEmail(String email);
+    boolean isUsernameExists(String username);
 
     boolean isCredentialsMatched(User user);
 

@@ -9,7 +9,6 @@ import javax.validation.constraints.AssertTrue;
 import javax.validation.constraints.Pattern;
 
 @Entity
-@Table
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -49,10 +48,6 @@ public class User {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
     public String getUsername() {
         return username;
     }
@@ -73,24 +68,12 @@ public class User {
         return email;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
     public String getRole() {
         return role;
     }
 
     public void setRole(String role) {
         this.role = role;
-    }
-
-    public String getPasswordConfirm() {
-        return passwordConfirm;
-    }
-
-    public void setPasswordConfirm(String passwordConfirm) {
-        this.passwordConfirm = passwordConfirm;
     }
 
     @AssertTrue(message = "{User.confirmPassword.MatchesPassword}")
